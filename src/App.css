@@ -1,7 +1,6 @@
 body {
   background-color: #ccc;
   padding: 0;
-  margin: 0;
 }
 
 .App {
@@ -10,11 +9,17 @@ body {
 }
 
 input {
+  position: absolute;
   margin: 0;
+  top: 50%;
+  left: 50%;
   appearance: none;
   width: 300px;
-  /* height: 20px; */
+  height: 20px;
   background-color: transparent;
+  transform: translate(-50%, -50%) rotate(90deg);
+  touch-action: none;
+  outline: none;
 }
 
 input::-webkit-slider-thumb {
@@ -30,18 +35,8 @@ input::-webkit-slider-thumb {
   transition: transform 0.2s;
 }
 
-/* expanded 5px */
-/* .focused::-webkit-slider-thumb {
-  transform: translateY(-7px);
-} */
-
-.items {
-  opacity: 1;
-  transition: top 0.2s;
-}
-
 .hidden {
-  animation: 0.1s 0.5s hide forwards;
+  animation: 0.1s 1s hide forwards;
 }
 
 @keyframes hide {
@@ -56,20 +51,18 @@ input::-webkit-slider-thumb {
 }
 
 .container {
-  width: max-content;
+  width: 20px;
+  height: 300px;
   position: relative;
   margin: auto;
-  margin-top: 160px;
-  transform: rotate(90deg);
+  margin-top: 60px;
 }
 
 .bg {
   position: absolute;
-  top: 12px;
-  left: 20px;
   z-index: -1;
-  width: calc(100% - 40px);
-  height: 20px;
+  margin-top: 20px;
+  height: 260px;
   background-color: #000;
   transition: 0.2s;
 }

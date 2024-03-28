@@ -1,17 +1,17 @@
-import "./App.css";
-import { useState } from "react";
+import "./App.css"
+import { useState } from "react"
 
-const MAX_VALUE = 255;
-const BUFFER_RANGE = 10;
-const exampleIndex = [10, 75, 128, 200, 210, 240];
+const MAX_VALUE = 255
+const BUFFER_RANGE = 10
+const exampleIndex = [15, 63, 127, 191, 201, 239]
 
 export default function App() {
-  const [value, setValue] = useState(0);
-  const [selectedIndex, setSelectedIndex] = useState("N/A");
-  const [isFocus, setIsFocus] = useState(false);
-  const [isPressed, setIsPressed] = useState(false);
+  const [value, setValue] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState("N/A")
+  const [isFocus, setIsFocus] = useState(false)
+  const [isPressed, setIsPressed] = useState(false)
 
-  const height = isPressed ? 30 : 20;
+  const width = isPressed ? 30 : 20
 
   return (
     <div className="App">
@@ -29,104 +29,117 @@ export default function App() {
           max={MAX_VALUE}
           value={value}
           onChange={(e) => {
-            setValue(e.target.value);
+            setValue(e.target.value)
           }}
           className={isFocus ? "focused" : ""}
           onMouseDown={() => setIsPressed(true)}
           onMouseUp={() => setIsPressed(false)}
           onTouchStart={() => {
-            setIsPressed(true);
-            setIsFocus(true);
+            setIsPressed(true)
+            setIsFocus(true)
           }}
           onTouchEnd={() => {
-            setIsPressed(false);
-            setIsFocus(false);
+            setIsPressed(false)
+            setIsFocus(false)
           }}
           onMouseEnter={() => setIsFocus(true)}
         />
-        <div className="bg" style={{ height: `${height}px` }}>
+        <ItemSelect
+          currentValue={value}
+          setValue={setValue}
+          setSelectedIndex={setSelectedIndex}
+          width={width}
+          isFocus={isFocus}
+          setIsFocus={setIsFocus}
+        />
+        <div
+          className="bg"
+          style={{
+            width: `${width}px`,
+            transform: `translateX(${20 - width}px)`,
+          }}
+        >
           {exampleIndex.map((v, i) => {
-            return <ValueTag valueIndex={v} key={i} height={height} />;
+            return <ValueTag valueIndex={v} key={i} width={width} />
           })}
-          <ItemSelect
-            currentValue={value}
-            setValue={setValue}
-            setSelectedIndex={setSelectedIndex}
-            height={height}
-            isFocus={isFocus}
-          />
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function ItemSelect({
   currentValue,
   setSelectedIndex,
   setValue,
-  height,
+  width,
   isFocus,
+  setIsFocus
 }) {
-  if (
-    exampleIndex.every((v) => Math.abs(currentValue - v) > BUFFER_RANGE) ||
-    !isFocus
-  ) {
-    return <></>;
+  if (exampleIndex.every((v) => Math.abs(currentValue - v) > BUFFER_RANGE)) {
+    return <></>
   }
 
-  const ratio = currentValue / MAX_VALUE;
+  const ratio = currentValue / MAX_VALUE
 
   return (
     <div
       style={{
         position: "absolute",
-        width: "32px",
-        top: `${12 + height}px`,
-        left: `calc(${ratio * 100}% - 15px)`,
+        right: `${6 + width}px`,
+        top: `calc(${ratio * 100 * 260 / 300}% + 10px)`,
         cursor: "pointer",
-        transition: "top 0.2s",
+        transition: "right 0.2s",
+        direction: "rtl",
+        display: "flex",
+        gap: "6px"
       }}
+      className={isFocus ? undefined : "hidden"}
+      onTouchStart={() => {
+            setIsFocus(true)
+          }}
+          onTouchEnd={() => {
+            setIsFocus(false)
+          }}
     >
       {exampleIndex.map((v, i) => {
-        if (Math.abs(currentValue - v) > BUFFER_RANGE) return;
+        if (Math.abs(currentValue - v) > BUFFER_RANGE) return
         return (
           <div
             style={{
-              width: "32px",
+              minWidth: "32px",
               backgroundColor: "#f00",
               color: "#fff",
-              padding: "3px",
-              marginBottom: "20px",
-              transform: "rotate(-90deg) translateY(-3px)",
+              padding: "2px",
               userSelect: "none",
+              display: "inline-block"
             }}
             key={i}
             onClick={() => {
-              setSelectedIndex(v);
-              setValue(v);
+              setSelectedIndex(v)
+              setValue(v)
             }}
           >
             {v}
           </div>
-        );
+        )
       })}
     </div>
-  );
+  )
 }
 
-function ValueTag({ valueIndex, height }) {
-  const ratio = valueIndex / MAX_VALUE;
+function ValueTag({ valueIndex, width }) {
+  const ratio = valueIndex / MAX_VALUE
   return (
     <div
       style={{
-        width: "1px",
-        height: `${height}px`,
+        height: "1px",
+        width: `${width}px`,
         backgroundColor: "#0ef",
         position: "absolute",
-        left: `calc(${ratio.toFixed(2) * 100}%)`,
+        top: `calc(${ratio.toFixed(2) * 100}% - 1px)`,
         transition: "0.2s",
       }}
     ></div>
-  );
+  )
 }
