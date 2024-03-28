@@ -1,8 +1,12 @@
-# React + Vite
+# React Slider Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Demostration of a React slider component with following features:
 
-Currently, two official plugins are available:
+- Full functionality of a conventional scrollbar
+- Value marks on track
+- Clickable tags or preview thumbnails
+- Multiple tags of same value
+- Expand upon scrolling
+- Custom thumb
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Inspired by youtube timeline and scroll bar in vscode, one of the use case for such slider is for Medical Image Viewers to mark slice of interest on the scroll bar and display additional tags and key view upon scroll or hover. One example of the actual implementation is DeepLung-CAC by DeepRad.AI, which streamlined user workflow with the use of such slider to mark nodules detected by AI, and user can simply click on the tags to select the nodules for details and editing.
