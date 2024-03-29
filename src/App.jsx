@@ -28,7 +28,11 @@ export default function App() {
       <p>Selected value: {selectedIndex}</p>
       <p>Example value tags: {exampleIndex.toString()}</p>
 
-      <div className="container" onMouseLeave={() => setIsFocus(false)}>
+      <div
+        className="container"
+        onMouseLeave={() => setIsFocus(false)}
+        onMouseEnter={() => setIsFocus(true)}
+      >
         <input
           type="range"
           min={0}
@@ -48,7 +52,7 @@ export default function App() {
             setIsPressed(false);
             setIsFocus(false);
           }}
-          onMouseEnter={() => setIsFocus(true)}
+          // onMouseEnter={() => setIsFocus(true)}
         />
         <ItemSelect
           currentValue={value}
