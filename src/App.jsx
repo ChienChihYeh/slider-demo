@@ -1,24 +1,30 @@
-import "./App.css"
-import { useState } from "react"
-
-const MAX_VALUE = 255
-const BUFFER_RANGE = 10
-const exampleIndex = [15, 63, 127, 191, 201, 239]
+import "./App.css";
+import { useState } from "react";
+import GitHubIcon from "./GitHubIcon";
+const MAX_VALUE = 255;
+const BUFFER_RANGE = 10;
+const exampleIndex = [15, 63, 127, 191, 201, 239];
 
 export default function App() {
-  const [value, setValue] = useState(0)
-  const [selectedIndex, setSelectedIndex] = useState("N/A")
-  const [isFocus, setIsFocus] = useState(false)
-  const [isPressed, setIsPressed] = useState(false)
+  const [value, setValue] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState("--");
+  const [isFocus, setIsFocus] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
 
-  const width = isPressed ? 30 : 20
+  const width = isPressed ? 30 : 20;
 
   return (
     <div className="App">
       <h1>Slider Example</h1>
       <p>
+        <a href="https://github.com/ChienChihYeh/slider-demo">
+          <GitHubIcon className={"link-icon"} />
+        </a>
+      </p>
+      <p>
         Current value: {value} / {MAX_VALUE}
       </p>
+      <p></p>
       <p>Selected value: {selectedIndex}</p>
       <p>Example value tags: {exampleIndex.toString()}</p>
 
@@ -29,18 +35,18 @@ export default function App() {
           max={MAX_VALUE}
           value={value}
           onChange={(e) => {
-            setValue(e.target.value)
+            setValue(e.target.value);
           }}
           className={isFocus ? "focused" : ""}
           onMouseDown={() => setIsPressed(true)}
           onMouseUp={() => setIsPressed(false)}
           onTouchStart={() => {
-            setIsPressed(true)
-            setIsFocus(true)
+            setIsPressed(true);
+            setIsFocus(true);
           }}
           onTouchEnd={() => {
-            setIsPressed(false)
-            setIsFocus(false)
+            setIsPressed(false);
+            setIsFocus(false);
           }}
           onMouseEnter={() => setIsFocus(true)}
         />
@@ -56,16 +62,15 @@ export default function App() {
           className="bg"
           style={{
             width: `${width}px`,
-            transform: `translateX(${20 - width}px)`,
           }}
         >
           {exampleIndex.map((v, i) => {
-            return <ValueTag valueIndex={v} key={i} width={width} />
+            return <ValueTag valueIndex={v} key={i} width={width} />;
           })}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function ItemSelect({
@@ -74,36 +79,36 @@ function ItemSelect({
   setValue,
   width,
   isFocus,
-  setIsFocus
+  setIsFocus,
 }) {
   if (exampleIndex.every((v) => Math.abs(currentValue - v) > BUFFER_RANGE)) {
-    return <></>
+    return <></>;
   }
 
-  const ratio = currentValue / MAX_VALUE
+  const ratio = currentValue / MAX_VALUE;
 
   return (
     <div
       style={{
         position: "absolute",
         right: `${6 + width}px`,
-        top: `calc(${ratio * 100 * 260 / 300}% + 10px)`,
+        top: `calc(${(ratio * 100 * 260) / 300}% + 10px)`,
         cursor: "pointer",
         transition: "right 0.2s",
         direction: "rtl",
         display: "flex",
-        gap: "6px"
+        gap: "6px",
       }}
       className={isFocus ? undefined : "hidden"}
       onTouchStart={() => {
-            setIsFocus(true)
-          }}
-          onTouchEnd={() => {
-            setIsFocus(false)
-          }}
+        setIsFocus(true);
+      }}
+      onTouchEnd={() => {
+        setIsFocus(false);
+      }}
     >
       {exampleIndex.map((v, i) => {
-        if (Math.abs(currentValue - v) > BUFFER_RANGE) return
+        if (Math.abs(currentValue - v) > BUFFER_RANGE) return;
         return (
           <div
             style={{
@@ -112,24 +117,24 @@ function ItemSelect({
               color: "#fff",
               padding: "2px",
               userSelect: "none",
-              display: "inline-block"
+              display: "inline-block",
             }}
             key={i}
             onClick={() => {
-              setSelectedIndex(v)
-              setValue(v)
+              setSelectedIndex(v);
+              setValue(v);
             }}
           >
             {v}
           </div>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
 
 function ValueTag({ valueIndex, width }) {
-  const ratio = valueIndex / MAX_VALUE
+  const ratio = valueIndex / MAX_VALUE;
   return (
     <div
       style={{
@@ -141,5 +146,5 @@ function ValueTag({ valueIndex, width }) {
         transition: "0.2s",
       }}
     ></div>
-  )
+  );
 }
