@@ -1,12 +1,14 @@
 # React Slider Demo
 
-### Demostration of a React slider component with following features:
+Try live demo [here](https://slider-demo-omega.vercel.app/)
 
-- Full functionality of a conventional scrollbar
-- Value marks on track
-- Clickable tags or preview thumbnails
-- Multiple tags of same value
-- Expand upon scrolling
-- Custom thumb
+### Demonstration of a React slider component with the following features:
 
-Inspired by youtube timeline and scroll bar in vscode, one of the use case for such slider is for Medical Image Viewers to mark slice of interest on the scroll bar and display additional tags and key view upon scroll or hover. One example of the actual implementation is DeepLung-CAC by DeepRad.AI, which streamlined user workflow with the use of such slider to mark nodules detected by AI, and user can simply click on the tags to select the nodules for details and editing.
+- Complete functionality of a conventional scrollbar
+- Value marks on track for contextual reference
+- Clickable tag or preview thumbnail for quick overview and navigation/selection
+- Ability to handle multiple tags of the same value
+- Track expands dynamically upon scrolling for enhanced visibility
+- Customizable thumb for aesthetic and UX preferences
+
+Inspired by the intuitive timeline of YouTube video player and the scrollbar in VSCode, one particular use case of such design is to enhance typical sliders in medical image viewers. It allows users to mark slices of interest on the scrollbar and conveniently access additional tags and key views upon scroll or hover. An example of its implementation is in DeepLung-CAC by DeepRad.AI, where users can get a quick overview of nodule distribution on the slider and effortlessly select nodules detected by AI for further examination and editing simply by clicking on the tags.
